@@ -1,0 +1,150 @@
+function makeCrystal(input){
+    "use strict";
+
+   // •	Cut – cuts the crystal in 4
+// •	Lap – removes 20% of the crystal’s thickness
+// •	Grind – removes 20 microns of thickness
+// •	Etch – removes 2 microns of thickness
+// •	X-ray – increases the thickness of the crystal by 1 micron; this operation can only be done once!
+// •	Transporting and washing – removes any imperfections
+
+    for (let i = 1; i < input.length; i++) {
+        let desirebleSize = input[0];
+        let chunk = input[i];
+        let cutCounter = 0;
+        let lapCounter = 0;
+        let grindCounter = 0;
+        let etchCounter = 0;
+        let washCounter = 0;
+        let xrayCounter = 0;
+
+        while(chunk != desirebleSize){
+            while (chunk > desirebleSize -2){
+                if(cut(chunk) <= desirebleSize-1){
+                    break;
+                }
+                else if(chunk === desirebleSize){
+                    break;
+                }
+                else{
+                    chunk = cut(chunk);
+                    cutCounter++;
+                }
+            }
+            chunk = transportAndWash(chunk);
+            washCounter++;
+            if(chunk === desirebleSize){
+                break;
+            }
+
+            while (chunk > desirebleSize - 2){
+                if(lap(chunk) <= desirebleSize-1){
+                    break;
+                }
+                else if(chunk === desirebleSize){
+                    break;
+                }
+                else{
+                    chunk = lap(chunk);
+                    lapCounter++;
+                }
+            }
+            chunk = transportAndWash(chunk);
+            washCounter++;
+            if(chunk === desirebleSize){
+                break;
+            }
+
+            while (chunk > desirebleSize -2){
+                if(grind(chunk) <= desirebleSize-1){
+                    break;
+                }
+                else if(chunk === desirebleSize){
+                    break;
+                }
+                else{
+                    chunk = grind(chunk);
+                    grindCounter++;
+                }
+            }
+            chunk = transportAndWash(chunk);
+            washCounter++;
+            if(chunk === desirebleSize){
+                break;
+            }
+
+            while (chunk > desirebleSize -2){
+                if(etch(chunk) <= desirebleSize-1){
+                    break;
+                }
+                else if(chunk === desirebleSize){
+                    break;
+                }
+                else{
+                    chunk = etch(chunk);
+                    etchCounter++;
+                }
+            }
+            chunk = transportAndWash(chunk);
+            washCounter++;
+            if(chunk === desirebleSize){
+                break;
+            }
+
+            if(chunk === desirebleSize - 1){
+                chunk = xray(chunk);
+                xrayCounter++;
+            }
+
+            chunk = transportAndWash(chunk);
+            washCounter++;
+            if(chunk === desirebleSize){
+                break;
+            }
+
+        }
+
+        console.log("Processing chunk " + input[i] +" microns");
+        if(cutCounter > 0){
+            console.log("Cut x" + cutCounter +"\nTransporting and washing");
+        }
+
+        if(lapCounter > 0){
+            console.log("Lap x" + lapCounter +"\nTransporting and washing");
+        }
+
+        if(grindCounter > 0){
+            console.log("Grind x" + grindCounter +"\nTransporting and washing");
+        }
+
+        if(etchCounter > 0){
+            console.log("Etch x" + etchCounter +"\nTransporting and washing");
+        }
+
+        if(xrayCounter > 0){
+            console.log("X-ray x" + xrayCounter);
+        }
+
+            console.log("Finished crystal " + desirebleSize + " microns");
+
+    }
+
+    function  cut(chunk) {
+        return chunk / 4 ;
+    }
+    function  lap(chunk) {
+        return chunk - chunk / 5 ;
+    }
+    function  grind(chunk) {
+        return chunk - 20 ;
+    }
+    function  etch(chunk) {
+        return chunk -2 ;
+    }
+    function  xray(chunk) {
+        return chunk + 1 ;
+    }
+    function  transportAndWash(chunk) {
+        return Math.floor(chunk) ;
+    }
+}
