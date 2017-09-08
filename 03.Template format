@@ -1,0 +1,15 @@
+function template (input){
+    "use strict";
+    let firstPart = '<?xml version="1.0" encoding="UTF-8"?>\n<quiz>\n';
+    let result = '';
+    let qstAnswer = '';
+    for (let i = 0; i < input.length - 1; i+=2) {
+       let the_question = "<question>\n" + input[i] + "\n </question>\n";
+        let the_answer = "<answer>\n" + input[i + 1]+ "\n</answer>\n";
+
+firstPart += the_question + the_answer;
+    }
+
+result += firstPart + "</quiz>";
+    console.log(result);
+}
