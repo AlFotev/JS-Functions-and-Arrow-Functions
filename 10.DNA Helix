@@ -1,0 +1,47 @@
+function dna (num){
+    "use strict";
+
+        let base = "ATCGTTAGGG";
+        let baseLength = base.length;
+        let timer = 0;
+        let index = 0;
+
+
+            for (let i = 0; i < num; i++) {
+                if(index >= baseLength ){
+                    index = 0;
+                }
+                let pattern ='';
+                let currentSym = base[index];
+                let nextSym = base[index + 1];
+                if(timer === num){
+                    break;
+                }
+                if(i === 0){
+                    pattern = '**' + currentSym + nextSym + '**';
+                    console.log(pattern);
+                    timer++;
+                    index += 2;
+                }
+                else if(i === 1){
+                    pattern = '*' + currentSym + '--' + nextSym + '*';
+                    console.log(pattern);
+                    timer++;
+                    index += 2;
+                }
+                else if(i === 2){
+                    pattern =  currentSym + '----' + nextSym;
+                    console.log(pattern);
+                    timer++;
+                    index += 2;
+                }
+                else if(i === 3){
+                    pattern = '*' + currentSym+ '--' + nextSym + '*';
+                    console.log(pattern);
+                    timer++;
+                    index += 2;
+                    i = -1;
+                }
+            }
+
+    }
